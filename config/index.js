@@ -1,8 +1,14 @@
-const artifactDetails = require('../ArtifactDetails.json');
-const path = require('path');
+import pino from 'pino';
+import artifactDetails from '../ArtifactDetails.js';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const logPath = path.join(__dirname, '../logs/development.log');
 
-module.exports = {
+const config = {
     web: {
         artifact: artifactDetails,
         name: artifactDetails.name,
@@ -21,12 +27,15 @@ module.exports = {
       },
     logger: {
         file: logPath,
-        prettyPrint: {
-            levelFirst: false,
-            colorize: false,
-            ignore: 'hostname',
-            translateTime: 'yyyy-mm-dd HH:MM:ss',
-        },
+        pino: pino.transport({
+            target: 'pino-pretty',
+            options: { 
+                levelFirst: false,
+                colorize: false,
+                ignore: 'hostname',
+                translateTime: 'yyyy-mm-dd HH:MM:ss',
+            }
+        })
     },
     swagger: {
         routePrefix: '/docs',
@@ -65,3 +74,5 @@ module.exports = {
     },
     hoursFormat: 'HH:mm',
 };
+
+export default config;

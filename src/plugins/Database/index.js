@@ -1,21 +1,15 @@
-const mongoose = require('mongoose');
-const fp = require('fastify-plugin');
+import mongoose from 'mongoose';
+import fp from 'fastify-plugin';
+import models from '../../app/models/index.js';
 
 mongoose.set('bufferCommands', false);
 mongoose.Promise = global.Promise;
 
-module.exports = fp(async function mongodb(fastify) {
+const Mongodb = fp(async function mongodb(fastify) {
   try {
 
-    const db = await mongoose.connect(fastify.config.database.url, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    });
-
-    require('../../app/models');
-
+    const db = await mongoose.createConnection(fastify.config.database.url);
+    
     fastify.decorate('mongodb', db);
 
     console.log(
@@ -29,3 +23,5 @@ module.exports = fp(async function mongodb(fastify) {
     fastify.log.error(error);
   }
 });
+
+export default Mongodb;

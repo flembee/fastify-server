@@ -1,22 +1,29 @@
-require('colors');
-const fastify = require('fastify');
-const config = require('../config');
-const multer = require('fastify-multer')
+import 'colors';
+import fastify from 'fastify';
+import multer from 'fastify-multer';
+import morgan from 'morgan';
+import fastCors from '@fastify/cors';
+import fastHelmet from '@fastify/helmet';
+import fastSwagger from '@fastify/swagger';
+import fastBoom from 'fastify-boom';
 
-const { Mongodb, Services, Routes, Authentication, StoragePlugin, ReadPdfPlugin } = require('./plugins');
+import config from '../config/index.js';
+import plugins from './plugins/index.js';
+
+const { Mongodb, Services, Routes, Authentication, StoragePlugin, ReadPdfPlugin } = plugins;
 class Server {
   constructor() {
     this.fastify = fastify({
       logger: config.logger
     });
-    
+
     this.fastify
       .decorate('config', config)
-      .register(require('morgan')('dev'))
-      .register(require('fastify-cors'))
-      .register(require('fastify-helmet'))
-      .register(require('fastify-swagger'), config.swagger)
-      .register(require('fastify-boom'))
+      .register(morgan('dev'))
+      .register(fastCors)
+      .register(fastHelmet)
+      .register(fastSwagger, config.swagger)
+      .register(fastBoom)
       .register(multer.contentParser)
       .register(Authentication)
       .register(StoragePlugin)
@@ -45,4 +52,4 @@ class Server {
   }
 }
 
-module.exports = Server;
+export default Server;
