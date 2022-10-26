@@ -4,7 +4,7 @@ import utils from '../utils/index.js';
 const { customQuery, hashPassword } = utils;
 
 const UsersController = (fastify) => {
-    const { auth, usersService } = fastify;
+    const { auth, usersService, rolesService } = fastify;
     return {
         get: async (req, res) => {
             const result = await usersService.get(req.params.id);
@@ -18,7 +18,12 @@ const UsersController = (fastify) => {
 
         add: async (req, res) => {
             const hashed = await hashPassword(req.body.password);
-            const result = await usersService.add({ ...req.body, password: hashed });
+            const role = await rolesService.search(customQuery({name: 'User'}));
+
+            if(!role.docs[0])
+                return "";
+
+            const result = await usersService.add({ ...req.body, userRole: role.docs[0], password: hashed });
 
             res.send(result);
         },
