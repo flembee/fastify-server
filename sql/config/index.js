@@ -16,7 +16,10 @@ const config = {
         port: process.env.PORT,
     },
     database: {
-        url: process.env.SQL_URL,
+        host: process.env.SQL_HOST,
+        db: process.env.SQL_DB,
+        user: process.env.SQL_USER,
+        password: process.env.SQL_PASSWORD
     },
     gcpcloud: {
         GCP_PROJECT_ID: process.env.GCP_PROJECT_ID,
