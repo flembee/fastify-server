@@ -1,29 +1,34 @@
-import mysql from 'mysql2';
 import fp from 'fastify-plugin';
+import Sequelize from 'sequelize';
+
+import models from '../../app/models/index.js';
 
 const Sqldb = fp(async function sqldb(fastify) {
-    const connection = mysql.createConnection({
-      host : fastify.config.database.host,
-      user : fastify.config.database.user,
-      password : fastify.config.database.password,
-      database : fastify.config.database.db,
-    });
-    
-    connection.connect((err) => {
-      if (err){
-        console.log(
-          `Database cannot be connected: ${fastify.config.database.db} `.red
-        );
-        fastify.log.error(err);
-      }else{
-        console.log(
-          `Database connected succesfully ==> ${fastify.config.database.db}\n`
-            .green
-        );
+
+    const sequelize = 
+          new Sequelize(
+            fastify.config.database.db, 
+            fastify.config.database.user, 
+            fastify.config.database.password,
+            fastify.config.database
+          );
+
+    let db = {}
+
+    Object.values(models).forEach(m => {
+      const model = m(sequelize, Sequelize.DataTypes);
+      db[model.name] = model;
+    })
+
+    Object.keys(db).forEach(modelName => {
+      if (db[modelName].associate) {
+        db[modelName].associate(db);
       }
     });
 
-    fastify.decorate('sqldb', connection);
+    db.sequelize = sequelize;
+
+    fastify.decorate('sqldb', db);
 
 });
 

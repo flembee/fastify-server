@@ -4,10 +4,12 @@ class UsersService {
     }
 
     async search() {
-        this.db.query("SELECT * FROM users", function (err, result, fields) {
-            if (err) throw err;
-            console.log(result);
-        });
+        const users = await this.db.User.findAll({include:'roles'});
+
+        if (!users)
+            return "No data"
+
+        return users;
     }
 
     async get(id) {

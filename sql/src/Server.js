@@ -10,7 +10,7 @@ import fastBoom from 'fastify-boom';
 import config from '../config/index.js';
 import plugins from './plugins/index.js';
 
-const { Sqldb, Services, /*Routes, Authentication, StoragePlugin, ReadPdfPlugin*/ } = plugins;
+const { Sqldb, Services, Routes, Authentication, StoragePlugin, ReadPdfPlugin } = plugins;
 class Server {
   constructor() {
     this.fastify = fastify({
@@ -25,12 +25,12 @@ class Server {
       .register(fastSwagger, config.swagger)
       .register(fastBoom)
       .register(multer.contentParser)
-    //   .register(Authentication)
-    //   .register(StoragePlugin)
-    //   .register(ReadPdfPlugin)
+      .register(Authentication)
+      .register(StoragePlugin)
+      .register(ReadPdfPlugin)
       .register(Sqldb)
       .register(Services)
-    //   .register(Routes);
+      .register(Routes);
   }
 
   async start() {
@@ -48,6 +48,8 @@ class Server {
       console.log(
         `Server start on Port: ${this.fastify.server.address().port}`.green
       );
+
+       this.fastify.sqldb.sequelize.authenticate();
     });
   }
 }
