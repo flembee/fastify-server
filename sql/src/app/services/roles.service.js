@@ -4,7 +4,7 @@ class RolesService {
     }
 
     async search() {
-        const roles = await this.db.Role.findAll();
+        const roles = await this.db.Roles.findAll();
 
         if (!roles)
             return "No data"
@@ -13,7 +13,7 @@ class RolesService {
     }
 
     async get(id) {
-        const role = await this.db.Role.findOne({
+        const role = await this.db.Roles.findOne({
             where: {id},
         });
 
@@ -26,7 +26,7 @@ class RolesService {
     async add(data) {
         const { name } = data
 
-        const role = await this.db.Role.create({name});
+        const role = await this.db.Roles.create({name});
 
         if (!role)
             return "No data"
@@ -34,15 +34,13 @@ class RolesService {
         return role;
     }
 
-    async delete(id) {
-        const role = await this.db.Role.findOne({
-            where: {id}
+    async delete(ids) {
+        const role = await this.db.Roles.destroy({
+            where: {id: ids}
         });
 
         if (!role)
             return "No data"
-
-        await role.destroy();
 
         return role;
     }
@@ -50,21 +48,18 @@ class RolesService {
     async update(id, data) {
         const { name } = data
 
-        const role = await this.db.Role.findOne({
+        const role = await this.db.Roles.findOne({
             where: {id}
         });
 
         if (!role)
             return "No data"
 
-        const roleUpdated = {
-            ...role, 
-            name: name,
-        };
+        role.name = name;
 
-        await roleUpdated.save();
+        await role.save();
 
-        return roleUpdated;
+        return role.dataValues;
     }
 }
 

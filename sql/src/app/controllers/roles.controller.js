@@ -22,24 +22,22 @@ const RolesController = fastify => {
     },
 
     update: async (req, res) => {
-      const result = await rolesService.update(req.params.id, req.body);
+      await rolesService.update(req.params.id, req.body);
+
+      const query = customQuery(req.query);
+      const result = await rolesService.search(query);
+
       res.send(result);
     },
 
     delete: async (req, res) => {
-      try {
-        await rolesService.delete(req.body);
+      await rolesService.delete(req.body);
 
-        const query = customQuery(req.query);
-        const result = await rolesService.search({
-            ...query,
-            logger: req.user.id,
-        });
+      const query = customQuery(req.query);
+      const result = await rolesService.search(query);
 
-        res.send({ result, message: 'Deleted roles successfully' });
-      } catch (e) {
-          res.send(e);
-      }
+      res.send({ result, message: 'Deleted roles successfully' });
+
     }
   };
 };

@@ -2,13 +2,13 @@ import { Model } from 'sequelize';
 
 const UserSchema = (sequelize, DataTypes) => {
 
-  class User extends Model {
+  class Users extends Model {
     static associate({Roles}) {
-      this.hasMany(Roles, {foreignKey: 'userId',  as: 'roles' })
+      this.hasOne(Roles, {foreignKey: 'role',  as: 'roles' })
     }
   };
 
-  User.init({
+  Users.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -23,6 +23,10 @@ const UserSchema = (sequelize, DataTypes) => {
         notEmpty: {msg: "Name cannot be empty"},
       }
     },
+    role: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
     email:{
       type:DataTypes.STRING,
       allowNull: false,
@@ -35,10 +39,10 @@ const UserSchema = (sequelize, DataTypes) => {
   {
     sequelize,
     tableName: 'users',
-    modelName: 'User',
+    modelName: 'Users',
   });
 
-  return User;
+  return Users;
 };
 
 export default UserSchema;

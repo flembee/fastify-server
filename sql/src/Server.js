@@ -49,7 +49,10 @@ class Server {
         `Server start on Port: ${this.fastify.server.address().port}`.green
       );
 
-       this.fastify.sqldb.sequelize.authenticate();
+      // This is for create the tables
+      // this.fastify.sqldb.sequelize.sync({force: true}); 
+      
+      this.fastify.sqldb.sequelize.authenticate();
     });
   }
 }
