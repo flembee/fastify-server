@@ -66,41 +66,41 @@ We recommend to follow this pattern, you can generate a project with the Flembee
 
 #### MongoDB
 
-    ```console
-        PORT=3000
-        MONGO_URL=
-        SERVER_PORT=3050
-        SECRET_KEY=
-        EXPIRES_IN=6h
-        RESET_EXPIRES_IN=300000
-        RESET_SECRET_KEY=
-        salt=13
-        GCP_PROJECT_ID=
-        GCP_SERVICE_ACCOUNT=
-        GCP_PRIVATE_KEY=
-        GCP_STORAGE_BUCKET=
-    ```
+```console
+PORT=3000
+MONGO_URL=
+SERVER_PORT=3050
+SECRET_KEY=
+EXPIRES_IN=6h
+RESET_EXPIRES_IN=300000
+RESET_SECRET_KEY=
+salt=13
+GCP_PROJECT_ID=
+GCP_SERVICE_ACCOUNT=
+GCP_PRIVATE_KEY=
+GCP_STORAGE_BUCKET=
+```
 
 #### SQL
 
-    ```console
-        PORT=3000
-        SQL_HOST=
-        SQL_DB=
-        SQL_USER=
-        SQL_PASSWORD=
-        SQL_DIALECT=
-        SERVER_PORT=3050
-        SECRET_KEY=
-        EXPIRES_IN=6h
-        RESET_EXPIRES_IN=300000
-        RESET_SECRET_KEY=
-        salt=13
-        GCP_PROJECT_ID=
-        GCP_SERVICE_ACCOUNT=
-        GCP_PRIVATE_KEY=
-        GCP_STORAGE_BUCKET=
-    ```
+```console
+PORT=3000
+SQL_HOST=
+SQL_DB=
+SQL_USER=
+SQL_PASSWORD=
+SQL_DIALECT=
+SERVER_PORT=3050
+SECRET_KEY=
+EXPIRES_IN=6h
+RESET_EXPIRES_IN=300000
+RESET_SECRET_KEY=
+salt=13
+GCP_PROJECT_ID=
+GCP_SERVICE_ACCOUNT=
+GCP_PRIVATE_KEY=
+GCP_STORAGE_BUCKET=
+```
 
 2. Install dependencies:
 
