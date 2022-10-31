@@ -46,7 +46,7 @@ The user logins via Auth, the application is also protected by a rate limiter an
 The project follows a well established pattern within the Fastify community, it has two top level folders, `app` and `plugins`.
 
 <p style="text-align:center">
-  <img src="./structure.png" alt="project structure">
+  <img src="./structure.png" alt="project structure" width=300>
 </p>
 
 The first one contains all the code that should be shared across your entire aplication, such as controllers, services, models and routes, while the second one contains all the plugins, such as the redirect code and the auth APIs (Authentication), Database connection, Storage manager in the GCP and ReadPDF service.
