@@ -44,7 +44,7 @@ The user logins via Auth, the application is also protected by a rate limiter an
 
 #### SQL
 
-    ```sh
+    ```
         PORT=3000
         SQL_HOST=
         SQL_DB=
