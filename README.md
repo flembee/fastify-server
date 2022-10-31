@@ -66,7 +66,7 @@ We recommend to follow this pattern, you can generate a project with the Flembee
 
 #### MongoDB
 
-    ```
+    ```console
         PORT=3000
         MONGO_URL=
         SERVER_PORT=3050
@@ -83,7 +83,7 @@ We recommend to follow this pattern, you can generate a project with the Flembee
 
 #### SQL
 
-    ```
+    ```console
         PORT=3000
         SQL_HOST=
         SQL_DB=

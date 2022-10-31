@@ -44,7 +44,7 @@ The user logins via Auth, the application is also protected by a rate limiter an
 
 #### MongoDB
 
-    ```
+    ```console
         PORT=3000
         MONGO_URL=
         SERVER_PORT=3050
