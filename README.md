@@ -139,7 +139,7 @@ Open [`deploy-cloud`](./deploy-cloud), you will find everything you need there.
 
  ### Also using TypeScript?
 
-Yes! Fastify supports TypeScript [out of the box](https://www.fastify.io/docs/latest/TypeScript/)!
+Yes! Fastify supports TypeScript [out of the box](https://www.fastify.io/docs/latest/Reference/TypeScript/)!
 The project is written in plain JavaScript, but probably in the future there will be a branch with a TypeScript implementation.
 
 ## Author
