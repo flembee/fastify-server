@@ -29,9 +29,9 @@
 <tr>
 <td>
   
-This project is a small server using NodeJs and Fastify. It aims to show all the Fastify basics, best practices and recommendations. In addition, the Fastify MongoDB connection is complemented, with Mongoose, by means of a Fastify plugin **[Info Here](https://www.fastify.io/docs/latest/Reference/Plugins/)** On the other hand, the connection to an SQL instance (MySQL, SQL Server or PostgreSQL) using Sequelize to create and manage the database tables.
+This project is a small server using NodeJs and Fastify. It aims to show all the Fastify basics, best practices and recommendations. In addition, the Fastify MongoDB connection is complemented, with Mongoose, by means of a Fastify plugin ( **[More info Here](https://www.fastify.io/docs/latest/Reference/Plugins/)**). On the other hand, it also includes a connection to an SQL instance (MySQL, SQL Server or PostgreSQL) using Sequelize to create and manage the database tables.
 
-The user logins via Auth, the application is also protected by a rate limiter and during development it exposes a Swagger UI with every endpoint. Read the next section to understand how the project works and how it is recommended to explore it.
+The user logins via Auth and the application is also protected by a rate limiter and during development it exposes a Swagger UI with every endpoint. Read the next section to understand how the project works and how it is recommended to be explored.
 
 </td>
 </tr>
@@ -43,7 +43,7 @@ The user logins via Auth, the application is also protected by a rate limiter an
 <tr>
 <td>
   
-The project follows a well established pattern within the Fastify community, it has two top level folders, `app` and `plugins`.
+The project follows a well established pattern within the Fastify community since it has two top level folders: `app` and `plugins`.
 
 <p style="text-align:center">
   <img src="./structure.png" alt="project structure" width=300>
@@ -51,7 +51,7 @@ The project follows a well established pattern within the Fastify community, it 
 
 The first one contains all the code that should be shared across your entire aplication, such as controllers, services, models and routes, while the second one contains all the plugins, such as the redirect code and the auth APIs (Authentication), Database connection, Storage manager in the GCP and ReadPDF service.
 
-We recommend to follow this pattern, you can generate a project with the Flembee structure or by using [fastify-cli](https://github.com/fastify/fastify-cli).
+We recommend you follow this pattern, however you can generate a project with the Flembee structure or by using [fastify-cli](https://github.com/fastify/fastify-cli).
 
 </td>
 </tr>
