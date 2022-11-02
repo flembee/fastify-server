@@ -59,7 +59,7 @@ class RolesService {
 
         await role.save();
 
-        return role.dataValues;
+        return role;
     }
 }
 

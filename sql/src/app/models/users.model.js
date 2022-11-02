@@ -23,6 +23,14 @@ const UserSchema = (sequelize, DataTypes) => {
         notEmpty: {msg: "Name cannot be empty"},
       }
     },
+    password:{
+      type:DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull: {msg: "Password is required"},
+        notEmpty: {msg: "Password cannot be empty"},
+      }
+    },
     role: {
       allowNull: false,
       type: DataTypes.INTEGER

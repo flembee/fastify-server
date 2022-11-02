@@ -4,7 +4,7 @@ class UsersService {
     }
 
     async search() {
-        const users = await this.db.User.findAll({include:'roles'});
+        const users = await this.db.Users.findAll({include:'roles'});
 
         if (!users)
             return "No data"
@@ -13,7 +13,7 @@ class UsersService {
     }
 
     async get(id) {
-        const user = await this.db.User.findOne({
+        const user = await this.db.Users.findOne({
             where: {id},
             include:'roles'
         });
@@ -25,7 +25,7 @@ class UsersService {
     }
 
     async getByEmail(email) {
-        const user = await this.db.User.findOne({
+        const user = await this.db.Users.findOne({
             where: {email},
             include:'roles'
         });
@@ -37,9 +37,9 @@ class UsersService {
     }
     
     async add(data) {
-        const { name, email, role } = data
+        const { name, email, role, password } = data
 
-        const user = await this.db.User.create({name, email, role});
+        const user = await this.db.Users.create({name, email, role, password});
 
         if (!user)
             return "No data"
@@ -47,15 +47,13 @@ class UsersService {
         return user;
     }
 
-    async delete(id) {
-        const user = await this.db.User.findOne({
-            where: {id}
+    async delete(ids) {
+        const user = await this.db.Users.destroy({
+            where: {id: ids}
         });
 
         if (!user)
             return "No data"
-
-        await user.destroy();
 
         return user;
     }
@@ -63,23 +61,36 @@ class UsersService {
     async update(id, data) {
         const { name, email, role } = data
 
-        const user = await this.db.User.findOne({
+        const user = await this.db.Users.findOne({
             where: {id}
         });
 
         if (!user)
             return "No data"
 
-        const userUpdated = {
-            ...user, 
-            name: name,
-            email: email,
-            role: role,
-        };
+        user.name = name;
+        user.email = email;
+        user.role = role;
 
-        await userUpdated.save();
+        await user.save();
 
-        return userUpdated;
+        return user;
+    }
+
+    async updatePassword(id, password) {
+
+        const user = await this.db.Users.findOne({
+            where: {id}
+        });
+
+        if (!user)
+            return "No data"
+
+        user.password = password;
+
+        await user.save();
+
+        return user;
     }
 }
 

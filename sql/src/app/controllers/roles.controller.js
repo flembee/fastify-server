@@ -37,7 +37,6 @@ const RolesController = fastify => {
       const result = await rolesService.search(query);
 
       res.send({ result, message: 'Deleted roles successfully' });
-
     }
   };
 };

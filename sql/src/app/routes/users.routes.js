@@ -10,9 +10,9 @@ const UsersRoutes = async function(fastify) {
   .get('/', { schema: search, /*preValidation: [fastify.validate]*/ }, UsersController(fastify).search)
   .get('/:id', { schema: get, /*preValidation: [fastify.validate]*/ }, UsersController(fastify).get)
   .post('/', { schema: add, /*preValidation: [fastify.validate]*/ }, UsersController(fastify).add)
-  .put('/:id', { schema: update, preValidation: [fastify.validate] }, UsersController(fastify).update)
-  .put('/update-password/:id', { schema: updatePassword, preValidation: [fastify.validate] }, UsersController(fastify).updatePassword)
-  .delete('/', { schema: remove, preValidation: [fastify.validate] }, UsersController(fastify).delete)
+  .put('/:id', { schema: update, /*preValidation: [fastify.validate]*/ }, UsersController(fastify).update)
+  .put('/update-password/:id', { schema: updatePassword, /*preValidation: [fastify.validate]*/ }, UsersController(fastify).updatePassword)
+  .delete('/', { schema: remove, /*preValidation: [fastify.validate]*/ }, UsersController(fastify).delete)
 };
 
 export default UsersRoutes;
