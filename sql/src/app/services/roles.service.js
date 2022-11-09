@@ -23,6 +23,17 @@ class RolesService {
         return role;
     }
 
+    async getByKey(key) {
+        const role = await this.db.Roles.findOne({
+            where: key,
+        });
+
+        if (!role)
+            return "No data"
+
+        return role;
+    }
+
     async add(data) {
         const { name } = data
 

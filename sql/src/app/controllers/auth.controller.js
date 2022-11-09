@@ -9,35 +9,46 @@ const AuthController = fastify => {
   return {
     signIn: async (req, res) => {
       const { email, password } = req.body;
+
       const user = await usersService.getByEmail(email);
 
-      const passwordIsMatch = await auth.onVerifyPassword(
-        password,
-        user.password
-      );
+      if(user.dataValues){
+        const passwordIsMatch = await auth.onVerifyPassword(
+          password,
+          user.dataValues.password
+        );
 
-      if (!passwordIsMatch) return Boom.unauthorized();
+        if (!passwordIsMatch) 
+          return "Password does not match";
+  
+        const token = await auth.generateToken(user.dataValues);
+  
+        res.send({ success: true, token: `Bearer ${token}` });
 
-      const token = await auth.generateToken(user);
-
-      res.send({ success: true, token: `Bearer ${token}` });
+      }else{
+        res.send({ success: false, message: 'User does not exist' });
+      }
     },
 
     signUp: async (req, res) => {
-      const { email, password } = req.body;
+      const { email, password, userRole } = req.body;
 
       const user = await usersService.getByEmail(email);
-      if(!user){
+
+      if(!user.dataValues){
         const hashed = await hashPassword(password);
 
-        const role = await rolesService.search(customQuery({name: 'User'}));
+        const role = await rolesService.getByKey({name: userRole});
 
-            if(!role.docs[0])
-                return "";
+        if(!role.dataValues)
+            return "No roles";
 
-        const userCreated = await usersService.add({ ...req.body, userRole: role.docs[0], password: hashed });
+        const userCreated = await usersService.add({ ...req.body, role: role.dataValues.id, password: hashed });
 
-        const token = await auth.generateToken(userCreated);
+        if(!userCreated.dataValues)
+            return "User cannot created";
+
+        const token = await auth.generateToken(userCreated.dataValues);
 
         res.send({ success: true, token: `Bearer ${token}` });
 
