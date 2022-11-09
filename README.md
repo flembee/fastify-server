@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://github.com/flembee/fastify-server/tree/main">
-    <img src="https://img.shields.io/badge/Last%20Commit-October-green?style=flat-square&logo=github&logoColor=white"
+    <img src="https://img.shields.io/badge/Last%20Commit-November-green?style=flat-square&logo=github&logoColor=white"
          alt="GitHub last commit">
     <a href="https://github.com/flembee/fastify-server/tree/develop">
     <img src="https://img.shields.io/badge/Open%20pull%20requests-0-blue?style=flat-square&logo=github&logoColor=whit"
